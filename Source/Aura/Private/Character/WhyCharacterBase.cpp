@@ -1,9 +1,6 @@
-// Copyright Druid Mechanics
 
+#include "Character/WhyCharacterBase.h"
 
-#include "WhyCharacterBase.h"
-
-// Sets default values
 AWhyCharacterBase::AWhyCharacterBase()
 {
 	PrimaryActorTick.bCanEverTick = false;
@@ -13,7 +10,6 @@ AWhyCharacterBase::AWhyCharacterBase()
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
-// Called when the game starts or when spawned
 void AWhyCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
