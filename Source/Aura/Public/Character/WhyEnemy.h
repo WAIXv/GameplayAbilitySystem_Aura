@@ -12,12 +12,11 @@ class AURA_API AWhyEnemy : public AWhyCharacterBase, public IInteractableInterfa
 {
 	
 	GENERATED_BODY()
+
+public:
+	AWhyEnemy();
 	
 public:
 	virtual void HighlightActor() override;
 	virtual void UnHighlightActor() override;
-
-protected:
-	UPROPERTY(BlueprintReadOnly, Category = "Interact")
-	bool bHightlighting{false};
 };
