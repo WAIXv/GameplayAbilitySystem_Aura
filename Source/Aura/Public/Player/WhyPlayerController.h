@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "WhyPlayerController.generated.h"
 
+class IInteractableInterface;
 struct FInputActionValue;
 class UInputAction;
 class UInputMappingContext;
@@ -20,6 +21,7 @@ class AURA_API AWhyPlayerController : public APlayerController
 
 public:
 	AWhyPlayerController();
+	virtual void PlayerTick(float DeltaTime) override;
 	
 protected:
 	virtual void BeginPlay() override;
@@ -33,4 +35,8 @@ private:
 	TObjectPtr<UInputAction> MoveAction;
 
 	void Move(const FInputActionValue& InputActionValue);
+
+	void CursorChase();
+	IInteractableInterface* LastInteraction;
+	IInteractableInterface* CurInteraction;
 };

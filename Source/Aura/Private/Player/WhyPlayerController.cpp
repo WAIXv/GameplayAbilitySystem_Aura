@@ -5,10 +5,65 @@
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Interaction/InteractableInterface.h"
 
 AWhyPlayerController::AWhyPlayerController()
 {
 	bReplicates = true;
+}
+
+void AWhyPlayerController::PlayerTick(float DeltaTime)
+{
+	Super::PlayerTick(DeltaTime);
+
+	CursorChase();
+}
+
+void AWhyPlayerController::CursorChase()
+{
+	FHitResult CursorHit;
+	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
+	if (!CursorHit.bBlockingHit) return;
+
+	LastInteraction = CurInteraction;
+	CurInteraction = Cast<IInteractableInterface>(CursorHit.GetActor());
+
+	/**
+	 * 光标射线检测，有几种情况：
+	 *	1. Last 为空 && Cur 也为空
+	 *		-- Do nothing
+	 *	2. Last 为空 && Cur 不为空
+	 *		-- 新选中，高亮Cur
+	 *	3. Last 不为空 && Cur 不为空
+	 *		-- 持续选中
+	 *			-- Last == Cur， Do nothing
+	 *			-- Last != Cur, 切换高亮
+	 *	4. Last 不为空 && Cur 为空
+	 *		-- 退出选中，取消高亮
+	 */
+	
+	if (LastInteraction == nullptr)
+	{
+		if (CurInteraction != nullptr)
+		{
+			CurInteraction->HighlightActor();
+		}
+	}
+	else
+	{
+		if (CurInteraction == nullptr)
+		{
+			LastInteraction->UnHighlightActor();
+		}
+		else
+		{
+			if (LastInteraction != CurInteraction)
+			{
+				LastInteraction->UnHighlightActor();
+				CurInteraction->HighlightActor();
+			}
+		}
+	}
 }
 
 void AWhyPlayerController::BeginPlay()
@@ -51,3 +106,5 @@ void AWhyPlayerController::Move(const FInputActionValue& InputActionValue)
 		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
 	}
 }
+
+
