@@ -3,8 +3,10 @@
 
 #include "Character/WhyCharacter.h"
 
+#include "AbilitySystemComponent.h"
+#include "AbilitySystem/WhyAttributeSet.h"
 #include "GameFramework/CharacterMovementComponent.h"
-
+#include "Player/WhyPlayerState.h"
 
 AWhyCharacter::AWhyCharacter()
 {
@@ -13,7 +15,35 @@ AWhyCharacter::AWhyCharacter()
 	GetCharacterMovement()->bConstrainToPlane = true;
 	GetCharacterMovement()->bSnapToPlaneAtStart = true;
 
+
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
 }
+
+void AWhyCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	// Init ability Actor info for server
+	InitAbilityActorInfo();
+}
+
+void AWhyCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+	
+	// Init ability Actor info for client
+	InitAbilityActorInfo();
+}
+
+void AWhyCharacter::InitAbilityActorInfo()
+{
+	const auto MyPlayerState = GetPlayerState<AWhyPlayerState>();
+	AbilitySystemComponent->InitAbilityActorInfo(GetPlayerState(), this);
+	
+	AbilitySystemComponent = MyPlayerState->GetAbilitySystemComponent();
+	AttributeSet = MyPlayerState->GetAttributeSet();
+}
+
+

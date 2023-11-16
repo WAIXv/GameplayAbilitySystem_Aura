@@ -16,3 +16,8 @@ void AWhyCharacterBase::BeginPlay()
 	
 }
 
+UAbilitySystemComponent* AWhyCharacterBase::GetAbilitySystemComponent() const
+{
+	return nullptr;
+}
+

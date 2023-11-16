@@ -15,8 +15,12 @@ class AURA_API AWhyEnemy : public AWhyCharacterBase, public IInteractableInterfa
 
 public:
 	AWhyEnemy();
-	
-public:
+
+	//~ Interactable Interface
 	virtual void HighlightActor() override;
 	virtual void UnHighlightActor() override;
+	//~ End Interactable Interface
+	
+protected:
+	virtual void BeginPlay() override;
 };
