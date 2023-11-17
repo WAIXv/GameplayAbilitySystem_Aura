@@ -10,14 +10,14 @@ AWhyCharacterBase::AWhyCharacterBase()
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
+UAbilitySystemComponent* AWhyCharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
 void AWhyCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
-}
-
-UAbilitySystemComponent* AWhyCharacterBase::GetAbilitySystemComponent() const
-{
-	return nullptr;
 }
 
