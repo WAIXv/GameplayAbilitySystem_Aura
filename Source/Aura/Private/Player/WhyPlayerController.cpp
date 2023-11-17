@@ -6,6 +6,8 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Interaction/InteractableInterface.h"
+#include "Player/WhyPlayerState.h"
+#include "UI/HUD/WhyHUD.h"
 
 AWhyPlayerController::AWhyPlayerController()
 {
@@ -69,11 +71,13 @@ void AWhyPlayerController::CursorChase()
 void AWhyPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	check(WhyContext);
+	check(InputMappingContext);
 
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-	check(Subsystem);
-	Subsystem->AddMappingContext(WhyContext, 0);
+	if (Subsystem)
+	{
+		Subsystem->AddMappingContext(InputMappingContext, 0);
+	}
 
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;
@@ -82,6 +86,13 @@ void AWhyPlayerController::BeginPlay()
 	InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
 	InputModeData.SetHideCursorDuringCapture(false);
 	SetInputMode(InputModeData);
+
+	//TODO : Client为什么不能在这访问到PlayerState
+	// if (const auto WhyHUD = GetHUD<AWhyHUD>())
+	// {
+	// 	const auto WhyPlayerState = GetPlayerState<AWhyPlayerState>();
+	// 	WhyHUD->InitOverlay(this, WhyPlayerState, WhyPlayerState->GetAbilitySystemComponent(), WhyPlayerState->GetAttributeSet());
+	// }
 }
 
 void AWhyPlayerController::SetupInputComponent()

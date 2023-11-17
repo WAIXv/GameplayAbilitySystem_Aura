@@ -4,9 +4,10 @@
 #include "Character/WhyCharacter.h"
 
 #include "AbilitySystemComponent.h"
-#include "AbilitySystem/WhyAttributeSet.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Player/WhyPlayerController.h"
 #include "Player/WhyPlayerState.h"
+#include "UI/HUD/WhyHUD.h"
 
 AWhyCharacter::AWhyCharacter()
 {
@@ -39,11 +40,19 @@ void AWhyCharacter::OnRep_PlayerState()
 
 void AWhyCharacter::InitAbilityActorInfo()
 {
-	const auto MyPlayerState = GetPlayerState<AWhyPlayerState>();
-	check(MyPlayerState)
-	AbilitySystemComponent = MyPlayerState->GetAbilitySystemComponent();
-	AttributeSet = MyPlayerState->GetAttributeSet();
-	AbilitySystemComponent->InitAbilityActorInfo(MyPlayerState, this);
+	const auto WhyPlayerState = GetPlayerState<AWhyPlayerState>();
+	check(WhyPlayerState)
+	AbilitySystemComponent = WhyPlayerState->GetAbilitySystemComponent();
+	AttributeSet = WhyPlayerState->GetAttributeSet();
+	AbilitySystemComponent->InitAbilityActorInfo(WhyPlayerState, this);
+
+	if (const auto WhyPlayerController = Cast<AWhyPlayerController>(GetController()))
+	{
+		if (const auto WhyHUD = WhyPlayerController->GetHUD<AWhyHUD>())
+		{
+			WhyHUD->InitOverlay(WhyPlayerController, WhyPlayerState, AbilitySystemComponent, AttributeSet);
+		}
+	}
 }
 
 
