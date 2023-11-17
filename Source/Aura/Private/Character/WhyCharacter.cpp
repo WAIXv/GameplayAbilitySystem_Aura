@@ -40,10 +40,10 @@ void AWhyCharacter::OnRep_PlayerState()
 void AWhyCharacter::InitAbilityActorInfo()
 {
 	const auto MyPlayerState = GetPlayerState<AWhyPlayerState>();
-	AbilitySystemComponent->InitAbilityActorInfo(GetPlayerState(), this);
-	
+	check(MyPlayerState)
 	AbilitySystemComponent = MyPlayerState->GetAbilitySystemComponent();
 	AttributeSet = MyPlayerState->GetAttributeSet();
+	AbilitySystemComponent->InitAbilityActorInfo(MyPlayerState, this);
 }
 
 
