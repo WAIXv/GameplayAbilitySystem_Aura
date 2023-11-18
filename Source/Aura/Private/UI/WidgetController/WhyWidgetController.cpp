@@ -10,3 +10,13 @@ void UWhyWidgetController::SetWidgetControllerParam(const FWidgetControllerParam
 	AbilitySystemComponent = WCParams.AbilitySystemComponent;
 	AttributeSet = WCParams.AttributeSet;
 }
+
+void UWhyWidgetController::BroadcastInitValues()
+{
+	// override in sub class
+}
+
+void UWhyWidgetController::BindCallbackToDepencies()
+{
+	// override in sub class
+}

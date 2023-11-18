@@ -14,19 +14,34 @@ void AWhyHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySyste
 
 	const auto WidgetController = GetOverlayWidgetController({PC, PS, ASC, AS});
 	OverlayWidget->SetWidgetController(WidgetController);
-
+	WidgetController->BroadcastInitValues();
+	
 	OverlayWidget->AddToViewport();
 }
 
 UOverlayWidgetController* AWhyHUD::GetOverlayWidgetController(const FWidgetControllerParams& WCParams)
 {
-	static auto OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
-
-	static bool FirstInit {true};
-	if (FirstInit)
+	// 耻辱柱
+	// Static and NewObject??
+	// GC??
+	
+	// static auto OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
+	// OverlayWidgetController->AddToRoot();
+	//
+	// static bool FirstInit {true};
+	// if (FirstInit)
+	// {
+	// 	OverlayWidgetController->SetWidgetControllerParam(WCParams);
+	// 	OverlayWidgetController->BindCallbackToDepencies();
+	// 	FirstInit = false;
+	// }
+	
+	if (OverlayWidgetController == nullptr)
 	{
+		OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
+	
 		OverlayWidgetController->SetWidgetControllerParam(WCParams);
-		FirstInit = false;
+		OverlayWidgetController->BindCallbackToDepencies();
 	}
 
 	return OverlayWidgetController;

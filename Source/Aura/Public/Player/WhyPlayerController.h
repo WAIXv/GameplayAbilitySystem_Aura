@@ -37,6 +37,6 @@ private:
 	void Move(const FInputActionValue& InputActionValue);
 
 	void CursorChase();
-	IInteractableInterface* LastInteraction;
-	IInteractableInterface* CurInteraction;
+	TObjectPtr<IInteractableInterface> LastInteraction;
+	TObjectPtr<IInteractableInterface> CurInteraction;
 };
