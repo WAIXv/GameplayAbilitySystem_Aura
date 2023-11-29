@@ -3,10 +3,16 @@
 
 #include "AbilitySystem/WhyAbilitySystemComponent.h"
 
-
-UWhyAbilitySystemComponent::UWhyAbilitySystemComponent()
+void UWhyAbilitySystemComponent::AbilityActorInfoSet()
 {
-	PrimaryComponentTick.bCanEverTick = true;
-	
+	OnGameplayEffectAppliedDelegateToSelf.AddUObject(this, &UWhyAbilitySystemComponent::EffectApplied);
 }
 
+void UWhyAbilitySystemComponent::EffectApplied(UAbilitySystemComponent* AbilitySystemComponent,
+	const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle)
+{
+	FGameplayTagContainer TagContainer;
+	EffectSpec.GetAllAssetTags(TagContainer);
+
+	EffectAssetTags.Broadcast(TagContainer);
+}

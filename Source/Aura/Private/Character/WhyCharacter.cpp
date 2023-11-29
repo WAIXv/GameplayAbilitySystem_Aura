@@ -4,6 +4,7 @@
 #include "Character/WhyCharacter.h"
 
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/WhyAbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/WhyPlayerController.h"
 #include "Player/WhyPlayerState.h"
@@ -45,6 +46,7 @@ void AWhyCharacter::InitAbilityActorInfo()
 	AbilitySystemComponent = WhyPlayerState->GetAbilitySystemComponent();
 	AttributeSet = WhyPlayerState->GetAttributeSet();
 	AbilitySystemComponent->InitAbilityActorInfo(WhyPlayerState, this);
+	Cast<UWhyAbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
 
 	if (const auto WhyPlayerController = Cast<AWhyPlayerController>(GetController()))
 	{

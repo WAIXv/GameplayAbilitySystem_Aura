@@ -7,6 +7,7 @@
 
 #include "WhyAbilitySystemComponent.generated.h"
 
+DECLARE_MULTICAST_DELEGATE_OneParam(FEffectAssetTags, const FGameplayTagContainer& /*AssetTag*/);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class AURA_API UWhyAbilitySystemComponent : public UAbilitySystemComponent
@@ -14,7 +15,10 @@ class AURA_API UWhyAbilitySystemComponent : public UAbilitySystemComponent
 	GENERATED_BODY()
 
 public:
+	void AbilityActorInfoSet();
 
-	UWhyAbilitySystemComponent();
+	FEffectAssetTags EffectAssetTags;
+protected:
 
+	void EffectApplied(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle);
 };

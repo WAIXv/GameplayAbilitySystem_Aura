@@ -21,3 +21,7 @@ void AWhyCharacterBase::BeginPlay()
 	
 }
 
+void AWhyCharacterBase::InitAbilityActorInfo()
+{
+}
+
