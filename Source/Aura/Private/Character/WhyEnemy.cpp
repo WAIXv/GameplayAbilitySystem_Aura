@@ -45,3 +45,8 @@ void AWhyEnemy::UnHighlightActor()
 	Weapon->SetRenderCustomDepth(false);
 	GetMesh()->SetRenderCustomDepth(false);
 }
+
+int32 AWhyEnemy::GetPlayerLevel()
+{
+	return Level;
+}

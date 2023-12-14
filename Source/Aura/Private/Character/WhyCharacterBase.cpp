@@ -1,6 +1,8 @@
 
 #include "Character/WhyCharacterBase.h"
 
+#include "AbilitySystemComponent.h"
+
 AWhyCharacterBase::AWhyCharacterBase()
 {
 	PrimaryActorTick.bCanEverTick = false;
@@ -23,5 +25,24 @@ void AWhyCharacterBase::BeginPlay()
 
 void AWhyCharacterBase::InitAbilityActorInfo()
 {
+}
+
+void AWhyCharacterBase::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level)
+{
+	check(IsValid(GetAbilitySystemComponent()));
+	check(GameplayEffectClass);
+	auto ContextHandle = GetAbilitySystemComponent()->MakeEffectContext();
+	ContextHandle.AddSourceObject(this);
+	const auto SpecHandle = GetAbilitySystemComponent()->MakeOutgoingSpec(GameplayEffectClass, Level, ContextHandle);
+	GetAbilitySystemComponent()->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
+}
+
+void AWhyCharacterBase::InitDefalutAttributes()
+{
+	ApplyEffectToSelf(DefaultPrimaryAttributes, 1.f);
+	ApplyEffectToSelf(DefaultSecondaryAttributes, 1.f);
+
+	//
+	ApplyEffectToSelf(DefaultVitalAttributes, 1.f);
 }
 

@@ -39,6 +39,13 @@ void AWhyCharacter::OnRep_PlayerState()
 	InitAbilityActorInfo();
 }
 
+int32 AWhyCharacter::GetPlayerLevel()
+{
+	const auto WhyPlayerState = GetPlayerState<AWhyPlayerState>();
+	check(WhyPlayerState);
+	return WhyPlayerState->GetPlayerLevel();
+}
+
 void AWhyCharacter::InitAbilityActorInfo()
 {
 	const auto WhyPlayerState = GetPlayerState<AWhyPlayerState>();
@@ -55,6 +62,7 @@ void AWhyCharacter::InitAbilityActorInfo()
 			WhyHUD->InitOverlay(WhyPlayerController, WhyPlayerState, AbilitySystemComponent, AttributeSet);
 		}
 	}
+	InitDefalutAttributes();
 }
 
 
