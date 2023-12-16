@@ -1,0 +1,44 @@
+#pragma once
+
+#include "NativeGameplayTags.h"
+
+// Attribute Tags
+namespace WhySecondaryAttributeTags
+{
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Armor)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(ArmorPenetration)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(BlockChance)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(CriticalHitChance)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(CriticalHitDamage)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(CriticalHitResistance)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(HealthRegeneration)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(ManaRegeneration)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(MaxHealth)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(MaxMana)
+}
+
+namespace WhyPrimaryAttributeTags
+{
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Strength)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Intelligence)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Resilience)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Vigor)
+}
+
+namespace WhyVitalAttributeTags
+{
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Health)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Mana)
+}
+
+
+// Input Action Tags
+namespace WhyInputActionTags
+{
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(LeftMouseButton);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(RightMouseButton);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_1);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_2);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_3);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_4);
+}

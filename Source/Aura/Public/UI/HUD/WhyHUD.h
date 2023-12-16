@@ -6,11 +6,11 @@
 #include "GameFramework/HUD.h"
 #include "WhyHUD.generated.h"
 
+struct FWidgetControllerParams;
 class UAbilitySystemComponent;
 class UAttributeSet;
-class UWhyWidgetController;
-struct FWidgetControllerParams;
 class UOverlayWidgetController;
+class UAttributeMenuWidgetController;
 class UWhyUserWidget;
 
 /**
@@ -30,6 +30,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	UOverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& WCParams);
 
+	UFUNCTION(BlueprintCallable)
+	UAttributeMenuWidgetController* GetAttributeMenuWidgetController(const FWidgetControllerParams WCParams);
+
 private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UWhyUserWidget> OverlayWidgetClass;
@@ -39,4 +42,13 @@ private:
 
 	UPROPERTY()
 	TObjectPtr<UOverlayWidgetController> OverlayWidgetController;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UWhyUserWidget> AttributeMenuWidgetClass;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UAttributeMenuWidgetController> AttributeMenuWidgetControllerClass;
+
+	UPROPERTY()
+	TObjectPtr<UAttributeMenuWidgetController> AttributeMenuWidgetController;
 };

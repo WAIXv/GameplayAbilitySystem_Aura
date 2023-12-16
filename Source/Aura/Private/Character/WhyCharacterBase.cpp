@@ -2,6 +2,7 @@
 #include "Character/WhyCharacterBase.h"
 
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/WhyAbilitySystemComponent.h"
 
 AWhyCharacterBase::AWhyCharacterBase()
 {
@@ -41,8 +42,15 @@ void AWhyCharacterBase::InitDefalutAttributes()
 {
 	ApplyEffectToSelf(DefaultPrimaryAttributes, 1.f);
 	ApplyEffectToSelf(DefaultSecondaryAttributes, 1.f);
-
-	//
+	
 	ApplyEffectToSelf(DefaultVitalAttributes, 1.f);
+}
+
+void AWhyCharacterBase::AddCharacterAbilities()
+{
+	UWhyAbilitySystemComponent* WhyASC = CastChecked<UWhyAbilitySystemComponent>(AbilitySystemComponent);
+	if (!HasAuthority()) return;
+
+	WhyASC->AddCharacterAbilities(StartUpAbilities);
 }
 

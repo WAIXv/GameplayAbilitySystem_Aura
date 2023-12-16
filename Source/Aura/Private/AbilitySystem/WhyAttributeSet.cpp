@@ -4,11 +4,33 @@
 #include "AbilitySystem/WhyAttributeSet.h"
 
 #include "GameplayEffectExtension.h"
+#include "WhyGameplayTags.h"
 #include "GameFramework/Character.h"
 #include "Net/UnrealNetwork.h"
 
 UWhyAttributeSet::UWhyAttributeSet()
 {
+	/* Primary Attributes */
+	TagsToAttributesMap.Add(WhyPrimaryAttributeTags::Strength, GetStrengthAttribute);
+	TagsToAttributesMap.Add(WhyPrimaryAttributeTags::Intelligence, GetIntelligenceAttribute);
+	TagsToAttributesMap.Add(WhyPrimaryAttributeTags::Resilience, GetResilienceAttribute);
+	TagsToAttributesMap.Add(WhyPrimaryAttributeTags::Vigor, GetVigorAttribute);
+
+	/* Secondary Attributes */
+	TagsToAttributesMap.Add(WhySecondaryAttributeTags::Armor, GetArmorAttribute);
+	TagsToAttributesMap.Add(WhySecondaryAttributeTags::ArmorPenetration, GetArmorPenetrationAttribute);
+	TagsToAttributesMap.Add(WhySecondaryAttributeTags::BlockChance, GetBlockChanceAttribute);
+	TagsToAttributesMap.Add(WhySecondaryAttributeTags::HealthRegeneration, GetHealthRegenerationAttribute);
+	TagsToAttributesMap.Add(WhySecondaryAttributeTags::ManaRegeneration, GetManaRegenerationAttribute);
+	TagsToAttributesMap.Add(WhySecondaryAttributeTags::CriticalHitChance, GetCriticalHitChanceAttribute);
+	TagsToAttributesMap.Add(WhySecondaryAttributeTags::CriticalHitDamage, GetCriticalHitDamageAttribute);
+	TagsToAttributesMap.Add(WhySecondaryAttributeTags::CriticalHitResistance, GetCriticalHitResistanceAttribute);
+	TagsToAttributesMap.Add(WhySecondaryAttributeTags::MaxHealth, GetMaxHealthAttribute);
+	TagsToAttributesMap.Add(WhySecondaryAttributeTags::MaxMana, GetMaxManaAttribute);
+
+	/* Vital Attributes */
+	TagsToAttributesMap.Add(WhyVitalAttributeTags::Health, GetHealthAttribute);
+	TagsToAttributesMap.Add(WhyVitalAttributeTags::Mana, GetManaAttribute);
 }
 
 void UWhyAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const

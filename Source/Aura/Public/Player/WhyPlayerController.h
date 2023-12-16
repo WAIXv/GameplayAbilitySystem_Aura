@@ -6,8 +6,10 @@
 #include "GameFramework/PlayerController.h"
 #include "WhyPlayerController.generated.h"
 
-class IInteractableInterface;
+struct FGameplayTag;
 struct FInputActionValue;
+class UWhyInputConfig;
+class IInteractableInterface;
 class UInputAction;
 class UInputMappingContext;
 
@@ -39,4 +41,11 @@ private:
 	void CursorChase();
 	IInteractableInterface* LastInteraction;
 	IInteractableInterface* CurInteraction;
+
+	void AbilityInputTagPressed(FGameplayTag InputTag);
+	void AbilityInputTagReleased(FGameplayTag InputTag);
+	void AbilityInputTagHeld(FGameplayTag InputTag);
+
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	TObjectPtr<UWhyInputConfig> InputConfig;
 };

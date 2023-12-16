@@ -5,11 +5,10 @@
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Input/WhyInputComponent.h"
 #include "Interaction/InteractableInterface.h"
-#include "Player/WhyPlayerState.h"
-#include "UI/HUD/WhyHUD.h"
 
-AWhyPlayerController::AWhyPlayerController()
+AWhyPlayerController::AWhyPlayerController(): LastInteraction(nullptr), CurInteraction(nullptr)
 {
 	bReplicates = true;
 }
@@ -68,6 +67,23 @@ void AWhyPlayerController::CursorChase()
 	}
 }
 
+void AWhyPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
+{
+	GEngine->AddOnScreenDebugMessage(INDEX_NONE, 3.f, FColor::Red, *InputTag.ToString());
+}
+
+void AWhyPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
+{
+	GEngine->AddOnScreenDebugMessage(INDEX_NONE, 3.f, FColor::Blue, *InputTag.ToString());
+
+}
+
+void AWhyPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
+{
+	GEngine->AddOnScreenDebugMessage(INDEX_NONE, 0.f, FColor::Green, *InputTag.ToString());
+
+}
+
 void AWhyPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -99,8 +115,9 @@ void AWhyPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
-	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AWhyPlayerController::Move);
+	UWhyInputComponent* WhyInputComponent = CastChecked<UWhyInputComponent>(InputComponent);
+	WhyInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AWhyPlayerController::Move);
+	WhyInputComponent->BindAbilityActions(InputConfig, this, &ThisClass::AbilityInputTagPressed, &ThisClass::AbilityInputTagReleased, &ThisClass::AbilityInputTagHeld);
 }
 
 void AWhyPlayerController::Move(const FInputActionValue& InputActionValue)

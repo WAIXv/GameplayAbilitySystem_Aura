@@ -3,6 +3,7 @@
 
 #include "UI/HUD/WhyHUD.h"
 #include "UI/WIdget/WhyUserWidget.h"
+#include "UI/WidgetController/AttributeMenuWidgetController.h"
 #include "UI/WidgetController/OverlayWidgetController.h"
 
 void AWhyHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)
@@ -45,4 +46,17 @@ UOverlayWidgetController* AWhyHUD::GetOverlayWidgetController(const FWidgetContr
 	}
 
 	return OverlayWidgetController;
+}
+
+UAttributeMenuWidgetController* AWhyHUD::GetAttributeMenuWidgetController(const FWidgetControllerParams WCParams)
+{
+	if (AttributeMenuWidgetController == nullptr)
+	{
+		AttributeMenuWidgetController = NewObject<UAttributeMenuWidgetController>(this, AttributeMenuWidgetControllerClass);
+	
+		AttributeMenuWidgetController->SetWidgetControllerParam(WCParams);
+		AttributeMenuWidgetController->BindCallbackToDepencies();
+	}
+
+	return AttributeMenuWidgetController;
 }

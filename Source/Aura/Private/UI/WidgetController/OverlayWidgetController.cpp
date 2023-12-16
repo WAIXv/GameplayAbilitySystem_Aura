@@ -44,7 +44,6 @@ void UOverlayWidgetController::BindCallbackToDepencies()
 		[this](const FGameplayTagContainer& AssetTags) {
 			for (const auto& Tag : AssetTags)
 			{
-
 				FGameplayTag MessageTag = FGameplayTag::RequestGameplayTag(FName{"Message"});
 				if (Tag.MatchesTag(MessageTag))
 				{
