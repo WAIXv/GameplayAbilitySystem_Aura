@@ -3,8 +3,10 @@
 
 #include "Player/WhyPlayerController.h"
 
+#include "AbilitySystemGlobals.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "AbilitySystem/WhyAbilitySystemComponent.h"
 #include "Input/WhyInputComponent.h"
 #include "Interaction/InteractableInterface.h"
 
@@ -69,19 +71,30 @@ void AWhyPlayerController::CursorChase()
 
 void AWhyPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(INDEX_NONE, 3.f, FColor::Red, *InputTag.ToString());
+	// GEngine->AddOnScreenDebugMessage(INDEX_NONE, 3.f, FColor::Red, *InputTag.ToString());
 }
 
 void AWhyPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(INDEX_NONE, 3.f, FColor::Blue, *InputTag.ToString());
+	if (GetASC() == nullptr) return;
 
+	GetASC()->AbilityInputTagReleased(InputTag);
 }
 
 void AWhyPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(INDEX_NONE, 0.f, FColor::Green, *InputTag.ToString());
+	if (GetASC() == nullptr) return;
 
+	GetASC()->AbilityInputTagHeld(InputTag);
+}
+
+UWhyAbilitySystemComponent* AWhyPlayerController::GetASC()
+{
+	if (WhyAbilitySystemComponent == nullptr)
+	{
+		WhyAbilitySystemComponent = Cast<UWhyAbilitySystemComponent>(UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(GetPawn<APawn>()));
+	}
+	return WhyAbilitySystemComponent;
 }
 
 void AWhyPlayerController::BeginPlay()

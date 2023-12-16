@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "WhyPlayerController.generated.h"
 
+class UWhyAbilitySystemComponent;
 struct FGameplayTag;
 struct FInputActionValue;
 class UWhyInputConfig;
@@ -48,4 +49,9 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	TObjectPtr<UWhyInputConfig> InputConfig;
+
+	UPROPERTY()
+	TObjectPtr<UWhyAbilitySystemComponent> WhyAbilitySystemComponent;
+
+	UWhyAbilitySystemComponent* GetASC();
 };

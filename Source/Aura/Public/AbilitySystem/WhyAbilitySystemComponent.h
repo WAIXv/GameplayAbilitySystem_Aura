@@ -19,6 +19,9 @@ public:
 
 	FEffectAssetTags EffectAssetTags;
 
+	void AbilityInputTagReleased(const FGameplayTag& InputTag);
+	void AbilityInputTagHeld(const FGameplayTag& InputTag);
+
 	void AddCharacterAbilities(TArray<TSubclassOf<UGameplayAbility>>& StartUpAbilities);
 
 protected:
