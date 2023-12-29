@@ -3,6 +3,7 @@
 
 #include "WhyAssestManager.h"
 
+#include "AbilitySystemGlobals.h"
 #include "WhyGameplayTags.h"
 
 UWhyAssestManager& UWhyAssestManager::Get()
@@ -15,4 +16,5 @@ UWhyAssestManager& UWhyAssestManager::Get()
 void UWhyAssestManager::StartInitialLoading()
 {
 	Super::StartInitialLoading();
+	UAbilitySystemGlobals::Get().InitGlobalData();
 }
