@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "WhyEffectActor.h"
 #include "GameFramework/Actor.h"
 #include "WhyProjectile.generated.h"
 
@@ -10,7 +11,7 @@ class UProjectileMovementComponent;
 class USphereComponent;
 
 UCLASS()
-class AURA_API AWhyProjectile : public AActor
+class AURA_API AWhyProjectile : public AWhyEffectActor
 {
 	GENERATED_BODY()
 

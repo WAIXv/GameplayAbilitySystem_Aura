@@ -16,14 +16,21 @@ void UWhyProjectileSpell::ActivateAbility(const FGameplayAbilitySpecHandle Handl
 
 }
 
-void UWhyProjectileSpell::SpawnProjectile()
+void UWhyProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocation)
 {
 	if (!GetAvatarActorFromActorInfo()->HasAuthority()) return;
 
 	ICombatInterface* CombatInterface = Cast<ICombatInterface>(GetAvatarActorFromActorInfo());
 	if (CombatInterface)
 	{
-		FTransform SpawnTransform {CombatInterface->GetCombatSocketLocation()};
+		const FVector SocketLocation = CombatInterface->GetCombatSocketLocation();
+		FRotator Rotation = (ProjectileTargetLocation - SocketLocation).Rotation();
+		Rotation.Pitch = 0.f;
+		
+		FTransform SpawnTransform;
+		SpawnTransform.SetLocation(SocketLocation);
+		SpawnTransform.SetRotation(Rotation.Quaternion());
+		
 		auto Projectile = GetWorld()->SpawnActorDeferred<AWhyProjectile>(
 			ProjectileClass,
 			SpawnTransform,
