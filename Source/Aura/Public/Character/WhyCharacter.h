@@ -6,6 +6,8 @@
 #include "WhyCharacterBase.h"
 #include "WhyCharacter.generated.h"
 
+class UMotionWarpingComponent;
+
 UCLASS()
 class AURA_API AWhyCharacter : public AWhyCharacterBase
 {
@@ -19,7 +21,12 @@ public:
 
 	//~ Combat Interface
 	virtual int32 GetPlayerLevel() override;
+	virtual void SetFacingTarget(FVector FacingTarget) override;
 	//~ End Combat Interface
+
+protected:
+	UPROPERTY(EditAnywhere)
+	TObjectPtr<UMotionWarpingComponent> MotionWarpingComponent;
 
 private:
 	virtual  void InitAbilityActorInfo() override;

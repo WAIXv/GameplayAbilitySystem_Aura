@@ -8,10 +8,12 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/WhyPlayerController.h"
 #include "Player/WhyPlayerState.h"
+#include "MotionWarpingComponent.h"
 #include "UI/HUD/WhyHUD.h"
 
 AWhyCharacter::AWhyCharacter()
 {
+	MotionWarpingComponent = CreateDefaultSubobject<UMotionWarpingComponent>("MotionWarping");
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 400.f, 0.f);
 	GetCharacterMovement()->bConstrainToPlane = true;
@@ -45,6 +47,11 @@ int32 AWhyCharacter::GetPlayerLevel()
 	const auto WhyPlayerState = GetPlayerState<AWhyPlayerState>();
 	check(WhyPlayerState);
 	return WhyPlayerState->GetPlayerLevel();
+}
+
+void AWhyCharacter::SetFacingTarget(FVector FacingTarget)
+{
+	MotionWarpingComponent->AddOrUpdateWarpTargetFromLocation("FacingTarget", FacingTarget);
 }
 
 void AWhyCharacter::InitAbilityActorInfo()

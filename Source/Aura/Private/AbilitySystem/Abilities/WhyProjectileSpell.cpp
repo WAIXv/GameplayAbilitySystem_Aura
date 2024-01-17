@@ -3,6 +3,9 @@
 
 #include "AbilitySystem/Abilities/WhyProjectileSpell.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
+#include "AbilitySystemComponent.h"
+#include "AbilitySystemGlobals.h"
 #include "Actor/WhyProjectile.h"
 #include "Interaction/CombatInterface.h"
 #include "Kismet/KismetSystemLibrary.h"
@@ -12,8 +15,6 @@ void UWhyProjectileSpell::ActivateAbility(const FGameplayAbilitySpecHandle Handl
                                           const FGameplayEventData* TriggerEventData)
 {
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
-
-
 }
 
 void UWhyProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocation)
@@ -37,8 +38,10 @@ void UWhyProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocatio
 			GetOwningActorFromActorInfo(),
 			Cast<APawn>(GetOwningActorFromActorInfo()),
 			ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
-
-		// TODO:
+		
+		const UAbilitySystemComponent* SourceASC = UAbilitySystemGlobals::GetAbilitySystemComponentFromActor(GetAvatarActorFromActorInfo());
+		const FGameplayEffectSpecHandle SpecHandle = SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(), SourceASC->MakeEffectContext());
+		Projectile->DamageEffectSpecHandle = SpecHandle;
 		
 		Projectile->FinishSpawning(SpawnTransform);
 	}

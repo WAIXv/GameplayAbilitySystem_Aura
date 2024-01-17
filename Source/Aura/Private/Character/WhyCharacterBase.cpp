@@ -3,6 +3,7 @@
 
 #include "AbilitySystemComponent.h"
 #include "AbilitySystem/WhyAbilitySystemComponent.h"
+#include "Aura/Aura.h"
 #include "Components/CapsuleComponent.h"
 
 AWhyCharacterBase::AWhyCharacterBase()
@@ -11,6 +12,8 @@ AWhyCharacterBase::AWhyCharacterBase()
 
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
 	GetMesh()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
+	GetMesh()->SetCollisionResponseToChannel(ECC_PROJECTILE, ECR_Overlap);
+	GetMesh()->SetGenerateOverlapEvents(true);
 
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
 	Weapon->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));
@@ -52,7 +55,6 @@ void AWhyCharacterBase::InitDefalutAttributes()
 {
 	ApplyEffectToSelf(DefaultPrimaryAttributes, 1.f);
 	ApplyEffectToSelf(DefaultSecondaryAttributes, 1.f);
-	
 	ApplyEffectToSelf(DefaultVitalAttributes, 1.f);
 }
 

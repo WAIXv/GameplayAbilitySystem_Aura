@@ -30,7 +30,7 @@ protected:
 	TObjectPtr<USkeletalMeshComponent> Weapon;
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
-	FName WeaponTipSocketName;
+	FName WeaponTipSocketName {"TipSocket"};
 
 	// Combat Interface
 	virtual FVector GetCombatSocketLocation() override;

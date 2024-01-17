@@ -13,3 +13,7 @@ FVector ICombatInterface::GetCombatSocketLocation()
 {
 	return FVector();
 }
+
+void ICombatInterface::SetFacingTarget(FVector FacingTarget)
+{
+}
