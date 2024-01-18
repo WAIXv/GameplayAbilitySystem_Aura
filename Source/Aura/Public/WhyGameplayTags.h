@@ -42,3 +42,10 @@ namespace WhyInputActionTags
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_3);
 	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Input_4);
 }
+
+
+// Damage Tags
+namespace WhyDamageTags
+{
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Damage);
+}

@@ -37,3 +37,8 @@ namespace WhyInputActionTags
 	UE_DEFINE_GAMEPLAY_TAG(Input_3, FName{TEXTVIEW("InputTag.Input_3")});
 	UE_DEFINE_GAMEPLAY_TAG(Input_4, FName{TEXTVIEW("InputTag.Input_4")});
 }
+
+namespace WhyDamageTags
+{
+	UE_DEFINE_GAMEPLAY_TAG(Damage, FName{TEXTVIEW("Damage")})
+}
