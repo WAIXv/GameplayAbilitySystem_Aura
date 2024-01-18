@@ -88,6 +88,16 @@ void UWhyAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 	{
 		SetMana(FMath::Clamp(GetMana(), 0, GetMaxMana()));
 	}
+	if (Data.EvaluatedData.Attribute == GetIncomingDamageAttribute())
+	{
+		const float LocalIncomingDamage = GetIncomingDamage();
+		SetIncomingDamage(0.f);
+		if (LocalIncomingDamage > 0.f)
+		{
+			const float NewHealth = GetHealth() - LocalIncomingDamage;
+			SetHealth(FMath::Clamp(GetHealth(), 0, NewHealth));
+		}
+	}
 }
 
 void UWhyAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth) const

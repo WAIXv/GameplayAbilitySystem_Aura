@@ -77,19 +77,19 @@ public:
 	
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = "OnRep_Strength", Category = "Primary Attributes")
 	FGameplayAttributeData Strength;
-	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, Strength);
+	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, Strength)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = "OnRep_Intelligence", Category = "Primary Attributes")
 	FGameplayAttributeData Intelligence;
-	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, Intelligence);
+	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, Intelligence)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = "OnRep_Resiience", Category = "Primary Attributes")
 	FGameplayAttributeData Resilience;
-	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, Resilience);
+	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, Resilience)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = "OnRep_Vigor", Category = "Primary Attributes")
 	FGameplayAttributeData Vigor;
-	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, Vigor);
+	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, Vigor)
 
 	/*
 	 * Secondary Attributes
@@ -97,35 +97,35 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Armor, Category = "Secondary Attributes")
 	FGameplayAttributeData Armor;
-	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, Armor);
+	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, Armor)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ArmorPenetration, Category = "Secondary Attributes")
 	FGameplayAttributeData ArmorPenetration;
-	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, ArmorPenetration);
+	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, ArmorPenetration)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_BlockChance, Category = "Secondary Attributes")
 	FGameplayAttributeData BlockChance;
-	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, BlockChance);
+	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, BlockChance)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CriticalHitChance, Category = "Secondary Attributes")
 	FGameplayAttributeData CriticalHitChance;
-	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, CriticalHitChance);
+	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, CriticalHitChance)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CriticalHitDamage, Category = "Secondary Attributes")
 	FGameplayAttributeData CriticalHitDamage;
-	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, CriticalHitDamage);
+	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, CriticalHitDamage)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CriticalHitResistance, Category = "Secondary Attributes")
 	FGameplayAttributeData CriticalHitResistance;
-	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, CriticalHitResistance);
+	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, CriticalHitResistance)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HealthRegeneration, Category = "Secondary Attributes")
 	FGameplayAttributeData HealthRegeneration;
-	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, HealthRegeneration);
+	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, HealthRegeneration)
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_ManaRegeneration, Category = "Secondary Attributes")
 	FGameplayAttributeData ManaRegeneration;
-	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, ManaRegeneration);
+	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, ManaRegeneration)
 
 	/*
 	 * Vital Attributes
@@ -133,19 +133,27 @@ public:
 	
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = "OnRep_Health", Category = "Vital Attributes")
 	FGameplayAttributeData Health;
-	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, Health);
+	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, Health)
 	
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = "OnRep_MaxHealth", Category = "Vital Attributes")
 	FGameplayAttributeData MaxHealth;
-	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, MaxHealth);
+	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, MaxHealth)
 	
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = "OnRep_Mana", Category = "Vital Attributes")
 	FGameplayAttributeData Mana;
-	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, Mana);
+	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, Mana)
 	
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = "OnRep_MaxMana", Category = "Vital Attributes")
 	FGameplayAttributeData MaxMana;
-	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, MaxMana);
+	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, MaxMana)
+
+	/*
+	 * Meta Attributes
+	 */
+
+	UPROPERTY(BlueprintReadOnly, Category = "Meta Attributes")
+	FGameplayAttributeData IncomingDamage;
+	ATTRIBUTE_ACCESSORS(UWhyAttributeSet, IncomingDamage)
 	
 
 	UFUNCTION()

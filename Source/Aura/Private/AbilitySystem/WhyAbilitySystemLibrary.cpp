@@ -3,6 +3,7 @@
 
 #include "AbilitySystem/WhyAbilitySystemLibrary.h"
 
+#include "..\..\Public\Game\WhyGameModeBase.h"
 #include "Kismet/GameplayStatics.h"
 #include "Player/WhyPlayerState.h"
 #include "UI/HUD/WhyHUD.h"
@@ -38,4 +39,25 @@ UAttributeMenuWidgetController* UWhyAbilitySystemLibrary::GetAttributeMenuWidget
 		}
 	}
 	return nullptr;
+}
+
+void UWhyAbilitySystemLibrary::InitializeDefaultAttributes(const UObject* WorldContext, ECharacterClass CharacterClass, float Level, UAbilitySystemComponent* ASC)
+{
+	const auto WhyGameMode = Cast<AWhyGameModeBase>(UGameplayStatics::GetGameMode(WorldContext));
+	if (!WhyGameMode) return;
+
+	UCharacterClassInfo* ClassClassInfo = WhyGameMode->CharacterClassInfo;
+	AActor* AvatarActor = ASC->GetAvatarActor();
+
+	auto MakeContextWithSourceObj = [AvatarActor, ASC] ()->FGameplayEffectContextHandle {
+		FGameplayEffectContextHandle EffectContextHandle = ASC->MakeEffectContext();
+		EffectContextHandle.AddSourceObject(AvatarActor);
+		return EffectContextHandle;
+	};
+	FGameplayEffectSpecHandle PrimaryAttributeSpecHandle = ASC->MakeOutgoingSpec(ClassClassInfo->GetClassDefaultInfo(CharacterClass).PrimaryAttributes, Level, MakeContextWithSourceObj());
+	FGameplayEffectSpecHandle SecondaryAttributeSpecHandle = ASC->MakeOutgoingSpec(WhyGameMode->CharacterClassInfo->SecondaryAttributes, Level, MakeContextWithSourceObj());
+	FGameplayEffectSpecHandle VitalAttributeSpecHandle = ASC->MakeOutgoingSpec(WhyGameMode->CharacterClassInfo->VitalAttributes, Level, MakeContextWithSourceObj());
+	ASC->ApplyGameplayEffectSpecToSelf(*PrimaryAttributeSpecHandle.Data.Get());
+	ASC->ApplyGameplayEffectSpecToSelf(*SecondaryAttributeSpecHandle.Data.Get());
+	ASC->ApplyGameplayEffectSpecToSelf(*VitalAttributeSpecHandle.Data.Get());
 }

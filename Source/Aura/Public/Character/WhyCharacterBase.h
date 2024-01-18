@@ -53,7 +53,7 @@ protected:
 	TSubclassOf<UGameplayEffect> DefaultSecondaryAttributes;
 
 	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level);
-	void InitDefalutAttributes();
+	virtual void InitDefalutAttributes();
 
 	void AddCharacterAbilities();
 

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "WhyCharacterBase.h"
+#include "AbilitySystem/Data/CharacterClassInfo.h"
 #include "Interaction/InteractableInterface.h"
 #include "UI/WidgetController/OverlayWidgetController.h"
 #include "WhyEnemy.generated.h"
@@ -37,9 +38,13 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo() override;
+	virtual void InitDefalutAttributes() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
-	int32 Level;
+	int32 Level {1};
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
+	ECharacterClass CharacterClass;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UWidgetComponent> HealthBar;

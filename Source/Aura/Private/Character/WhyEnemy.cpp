@@ -4,6 +4,7 @@
 #include "Character/WhyEnemy.h"
 
 #include "AbilitySystem/WhyAbilitySystemComponent.h"
+#include "AbilitySystem/WhyAbilitySystemLibrary.h"
 #include "AbilitySystem/WhyAttributeSet.h"
 #include "Aura/Aura.h"
 #include "Components/WidgetComponent.h"
@@ -58,6 +59,11 @@ void AWhyEnemy::InitAbilityActorInfo()
 	Cast<UWhyAbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
 
 	InitDefalutAttributes();
+}
+
+void AWhyEnemy::InitDefalutAttributes()
+{
+	UWhyAbilitySystemLibrary::InitializeDefaultAttributes(this, CharacterClass, Level, AbilitySystemComponent);
 }
 
 void AWhyEnemy::HighlightActor()

@@ -1,4 +1,0 @@
-﻿// 
-
-
-#include "Game/WhyGameMode.h"
